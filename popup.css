@@ -1,0 +1,133 @@
+/* popup.css */
+:root {
+  --primary-color: #3999af;
+  --primary-color-hover: #33889c;
+  --primary-color-active: #2b7a8c;
+  --border-color: rgba(27, 31, 35, 0.15);
+  --text-color: #fff;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.chartink-to-tv-container {
+  width: 300px;
+  padding: 20px;
+  text-align: left;
+  font-family: var(--font-family);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #333;
+  margin-top: 0;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  margin-right: 12px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 28px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.toggle-label {
+  font-size: 14px;
+}
+
+.tradeinski-bt {
+  display: block;
+  width: 100%; /* Ensures button spans the full container width */
+  padding: 8px 16px;
+  text-align: center;
+  margin-top: 10px;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+.tradeinski-bt:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.tradeinski-bt:active {
+  background-color: var(--primary-color-active);
+}
+
+.tradeinski-bt:focus {
+  outline: 2px solid rgba(46, 164, 79, 0.4);
+  outline-offset: 2px;
+}
