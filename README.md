@@ -1,15 +1,34 @@
-A browser extension that simplifies the process of navigating from Chartink's stock scanning platform to TradingView for detailed chart analysis. It enables users to redirect stock symbol links from Chartink directly to TradingView, provides a toggle for controlling redirection, and includes a utility to copy stock tickers from Chartink's scanner output.
+🧩 Chartink Bridge – Chrome Extension Description
+Chartink Bridge is a productivity-enhancing Chrome extension designed for stock market traders who use Chartink.com and TradingView. It seamlessly connects Chartink scanner widgets with TradingView by enabling smart ticker symbol redirection, one-click copying, and customizable ticker grouping.
 
-Key Features:
+⚙️ Key Features
+🔁 Chart Redirection Toggle
+Automatically redirects stock chart links from Chartink to TradingView with NSE symbols, enabling smoother technical analysis workflows.
 
-Automatic Redirection: Redirect Chartink links to TradingView charts for NSE-listed stocks.
+📋 Smart Copy Buttons
+Adds emoji-style 📋 copy buttons beside stock tickers on dashboard pages, allowing instant copy of individual tickers to clipboard.
 
-Ticker Copying: Copies all stock symbols from Chartink's scanner to the clipboard for further analysis.
+📦 Bulk Copy Functionality
+- Use the "Bridge" button to copy all tickers across scanner pages. Tickers are formatted and saved with a date stamp for efficient tracking.
 
-Toggle Control: A user-friendly switch to enable or disable automatic redirection as per preference.
+🧠 Intelligent Clipboard Control
+- Optionally limit copied tickers to the top 30 when grouping is enabled.
+- Automatically groups saved tickers in the popup window for review and reuse.
+- Displayed groups come with dedicated Copy Group buttons.
 
-Modern UI: Clean and responsive interface using CSS with a toggle and accessible buttons.
+🧩 Widget Copy Enhancement
+- Overrides default copy buttons in Chartink widgets to:
+- Format tickers properly (NSE: prefix)
+- Control copy size using toggle
+- Store full group in local storage for popup access
 
-Accessibility: Provides quick links to additional resources, like TradeINski's Linktree.
+🛠️ User Controls (in Popup Interface)
+✅ Redirect to TradingView: Toggle URL redirection on/off.
+✅ Show Copy Emoji Button: Enable/disable emoji-style copy buttons.
+✅ Group Tickers in Popup: Toggle grouping behavior and clipboard truncation.
 
-This tool is particularly helpful for traders and analysts using Chartink and TradingView for seamless workflow integration.
+📌 Target Audience
+This extension is ideal for technical traders, investors, and analysts who:
+- Use Chartink screeners to filter stocks,
+- Prefer TradingView for in-depth chart analysis,
+- Want a cleaner, faster way to copy and manage tickers.
