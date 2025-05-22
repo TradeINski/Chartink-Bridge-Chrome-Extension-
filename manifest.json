@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Chartink Bridge",
-  "version": "1.0",
+  "version": "3.5",
   "description": "Extension that copies Chartink scanner widget output to clipboard and TradingView",
-  "permissions": ["clipboardWrite", "activeTab", "scripting","storage"],
+  "permissions": ["clipboardWrite", "activeTab","storage"],
   "host_permissions": ["https://chartink.com/*"],
 
   "background": {

@@ -8,17 +8,36 @@
 </head>
 <body class="popup">
     <div class="chartink-to-tv-container">
-        <h1>Chartink Bridge</h1>
+        <a class="tradeinski-header" href="https://linktr.ee/TradeINski" target="_blank" aria-label="Visit TradeINski Linktree">TradeINski Chartink Bridge</a>
 
         <div class="toggle-container">
             <label class="switch" for="redirect">
                 <input type="checkbox" id="redirect" name="redirect" aria-label="Redirect Charts to TradingView">
                 <span class="slider round"></span>
             </label>
-            <span class="toggle-label">Redirect Charts To TradingView</span>
+            <span class="toggle-label">Redirect To TradingView</span>
         </div>
 
-        <a class="tradeinski-bt" href="https://linktr.ee/TradeINski" target="_blank" aria-label="Visit TradeINski Linktree">TradeINski</a>
+    <div class="toggle-container">
+        <label class="switch" for="widgetCopy">
+            <input type="checkbox" id="widgetCopy" name="widgetCopy" aria-label="Enable Widget Copy Button">
+            <span class="slider round"></span>
+        </label>
+        <span class="toggle-label">Show Copy Emoji Button</span>
+    </div>
+
+    <div class="toggle-container">
+        <label class="switch" for="copyButtonVisibility">
+            <input type="checkbox" id="copyButtonVisibility" name="copyButtonVisibility" aria-label="Group Tickers in Popup">
+            <span class="slider round"></span>
+        </label>
+        <span class="toggle-label">Group Tickers In Popup</span>
+    </div>
+
+        <div id="copiedTickersContainer" class="copied-tickers-container">
+            <h3>Last Copied Tickers</h3>
+            <div id="copiedTickersList"></div>
+        </div>
     </div>
 
     <script src="popup.js"></script>

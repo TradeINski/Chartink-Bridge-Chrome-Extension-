@@ -1,4 +1,3 @@
-/* popup.css */
 :root {
   --primary-color: #3999af;
   --primary-color-hover: #33889c;
@@ -9,39 +8,66 @@
 }
 
 .chartink-to-tv-container {
-  width: 300px;
-  padding: 20px;
-  text-align: left;
+  width: 230px;
+  min-height: 120px;
+  max-height: 415px;
+  padding: 8px; /* Reduced overall padding */
+  text-align: center;
   font-family: var(--font-family);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  border: 1px solid #ccc;
+  align-items: center;
+  border: 1px solid #bbb;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #333;
-  margin-top: 0;
+.tradeinski-header {
+  display: block;
+  width: 100%; /* Changed from 90% to 100% */
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  padding: 4px 0;
+  border-radius: 6px;
+  margin: 6px 0 8px 0;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 2px; /* Reduced margin between toggle section and the element below */
+  gap: 4px; /* Reduced gap between toggles */
+  padding: 4px; /* Reduced internal padding */
+  background-color: #f8f8f8;
+  border-radius: 6px;
+  border: 1px solid #eee;
 }
 
 .toggle-container {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
   width: 100%;
+  justify-content: flex-start;
+  margin-bottom: 0; /* Extra margins removed in favor of parent's gap */
+  padding: 2px 8px; /* Reduced vertical padding */
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 28px;
-  margin-right: 12px;
+  width: 35px;
+  height: 20px;
+  margin-right: 10px; /* Horizontal spacing stays the same */
 }
 
 .switch input {
@@ -58,21 +84,19 @@ h1 {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 28px;
+  transition: 0.4s;
+  border-radius: 20px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 20px;
-  width: 20px;
-  left: 4px;
-  bottom: 4px;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -85,13 +109,11 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  transform: translateX(20px);
+  transform: translateX(15px);
 }
 
 .slider.round {
-  border-radius: 28px;
+  border-radius: 20px;
 }
 
 .slider.round:before {
@@ -99,35 +121,118 @@ input:checked + .slider:before {
 }
 
 .toggle-label {
-  font-size: 14px;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
-.tradeinski-bt {
-  display: block;
-  width: 100%; /* Ensures button spans the full container width */
-  padding: 8px 16px;
-  text-align: center;
-  margin-top: 10px;
-  border: none;
-  background-color: var(--primary-color);
-  color: var(--text-color);
+.copied-tickers-container {
+  width: 100%;
+  margin-top: 2px; /* Reduced margin above the border */
+  border-top: 1px solid #b3b3b3;
+  padding-top: 2px; /* Reduced padding below the border */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Remove default margins from headings/paragraphs within copied-tickers-container */
+.copied-tickers-container h2,
+.copied-tickers-container p {
+  margin: 0;
+}
+
+#copiedTickersList {
+  flex-grow: 1;
+  overflow-y: auto;
+  font-size: 0.9em;
+  line-height: 1.4;
+  padding: 4px; /* Reduced padding */
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-bottom: 0;
+  overflow-x: hidden;
+  word-break: break-word;
+}
+
+.ticker-item {
+  margin-bottom: 4px; /* Reduced spacing */
+  padding: 3px 6px; /* Reduced vertical padding */
+  background-color: #fff;
+  border-radius: 3px;
+  border-left: 3px solid var(--primary-color);
+  word-break: break-all;
+}
+
+.ticker-group {
+  margin-bottom: 6px; /* Reduced margin */
+  padding: 6px; /* Reduced padding inside groups */
+  background-color: #f9f9f9;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
-  box-sizing: border-box; /* Includes padding in width calculation */
+  border: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.tradeinski-bt:hover {
+.ticker-group-header {
+  font-weight: bold;
+  margin-bottom: 4px; /* Reduced spacing below header */
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95em;
+}
+
+.ticker-group-list {
+  margin-bottom: 4px;
+  padding: 4px; /* Reduced padding */
+  background-color: #fff;
+  border-radius: 4px;
+  font-size: 0.9em;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.copy-group-button {
+  display: block;
+  padding: 6px 10px; /* Reduced padding for a compact click area */
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 2px; /* Reduced margin above button */
+}
+
+.copy-group-button:hover {
   background-color: var(--primary-color-hover);
 }
 
-.tradeinski-bt:active {
+.copy-group-button:active {
   background-color: var(--primary-color-active);
 }
+.copy-ticker-btn img {
+  vertical-align: middle;
+  opacity: 0.7;
+}
 
-.tradeinski-bt:focus {
-  outline: 2px solid rgba(46, 164, 79, 0.4);
-  outline-offset: 2px;
+.copy-ticker-btn img:hover {
+  opacity: 1;
+}
+.copy-to-tv {
+  transition: transform 0.2s ease;
+}
+
+.copy-to-tv:hover {
+  transform: scale(1.2);
+}
+
+.copy-to-tv:active {
+  transform: scale(0.9);
 }
