@@ -1,120 +1,150 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const redirectCheckbox = document.getElementById('redirect');
-    const copyButtonVisibilityCheckbox = document.getElementById('copyButtonVisibility');
-    const widgetCopyCheckbox = document.getElementById('widgetCopy');
-    const copiedTickersList = document.getElementById('copiedTickersList');
-    const _browser = typeof browser !== 'undefined' ? browser : chrome;
+  const redirectCheckbox = document.getElementById('redirect');
+  const copyButtonVisibilityCheckbox = document.getElementById('copyButtonVisibility');
+  const widgetCopyCheckbox = document.getElementById('widgetCopy');
+  const copiedTickersList = document.getElementById('copiedTickersList');
 
-    // Load saved settings and last copied tickers
-    _browser.storage.local.get(['chartRedirect', 'copyButtonVisibility', 'widgetCopy', 'lastCopiedTickers'], (result) => {
-        // Set checkbox states
-        redirectCheckbox.checked = result.chartRedirect !== false;
-        copyButtonVisibilityCheckbox.checked = result.copyButtonVisibility !== false;
-        widgetCopyCheckbox.checked = result.widgetCopy !== false;
+  const _browser = typeof browser !== 'undefined' ? browser : chrome;
 
-        // Display last copied tickers if they exist
-        if (result.lastCopiedTickers && result.lastCopiedTickers.length > 0) {
-            displayGroupedTickers(result.lastCopiedTickers);
-        } else {
-            copiedTickersList.innerHTML = '<div class="ticker-item">No tickers copied yet</div>';
-            document.querySelector('.chartink-to-tv-container').style.minHeight = '150px';
-        }
-    });
+  _browser.storage.local.get(
+    ['chartRedirect', 'copyButtonVisibility', 'widgetCopy', 'lastCopiedTickers'],
+    (result) => {
+      redirectCheckbox.checked = result.chartRedirect !== false;
+      copyButtonVisibilityCheckbox.checked = result.copyButtonVisibility !== false;
+      widgetCopyCheckbox.checked = result.widgetCopy !== false;
 
-    // Save redirect option
-    redirectCheckbox.addEventListener('change', () => {
-        const newState = redirectCheckbox.checked;
-        _browser.storage.local.set({ chartRedirect: newState });
-    });
+      if (result.lastCopiedTickers && result.lastCopiedTickers.length > 0) {
+        displayGroupedTickers(result.lastCopiedTickers);
+      } else {
+        copiedTickersList.innerHTML = '<div class="ticker-item">No tickers copied yet</div>';
+        const header = document.getElementById('tickerHeader');
+        if (header) header.textContent = 'Last Copied Tickers: 0';
+      }
+    }
+  );
 
-    // Save copy button visibility option
-    copyButtonVisibilityCheckbox.addEventListener('change', () => {
-        const newState = copyButtonVisibilityCheckbox.checked;
-        _browser.storage.local.set({ copyButtonVisibility: newState });
-    });
+  redirectCheckbox.addEventListener('change', () => {
+    const newState = redirectCheckbox.checked;
+    _browser.storage.local.set({ chartRedirect: newState });
+  });
 
-    // Save widget copy option
-    widgetCopyCheckbox.addEventListener('change', () => {
-        const newState = widgetCopyCheckbox.checked;
-        _browser.storage.local.set({ widgetCopy: newState });
-    });
+  copyButtonVisibilityCheckbox.addEventListener('change', () => {
+    const newState = copyButtonVisibilityCheckbox.checked;
+    _browser.storage.local.set({ copyButtonVisibility: newState });
+  });
 
-    // Listen for storage changes to update the tickers list
-    _browser.storage.onChanged.addListener((changes, namespace) => {
-        if (namespace === 'local' && changes.lastCopiedTickers) {
-            displayGroupedTickers(changes.lastCopiedTickers.newValue);
-        }
-    });
+  widgetCopyCheckbox.addEventListener('change', () => {
+    const newState = widgetCopyCheckbox.checked;
+    _browser.storage.local.set({ widgetCopy: newState });
+  });
 
-    function displayGroupedTickers(tickers) {
-        if (!tickers || tickers.length === 0) {
-            copiedTickersList.innerHTML = '<div class="ticker-item">No tickers copied yet</div>';
-            document.querySelector('.chartink-to-tv-container').style.minHeight = '150px';
-            return;
-        }
+  _browser.storage.onChanged.addListener((changes, namespace) => {
+    if (namespace === 'local' && changes.lastCopiedTickers) {
+      displayGroupedTickers(changes.lastCopiedTickers.newValue);
+    }
+  });
 
-        copiedTickersList.innerHTML = '';
-        
-        // Split tickers into groups of 30
-        const groupSize = 30;
-        const tickerGroups = [];
-        for (let i = 0; i < tickers.length; i += groupSize) {
-            tickerGroups.push(tickers.slice(i, i + groupSize));
-        }
+  function displayGroupedTickers(tickers) {
+    const tickerHeader = document.getElementById('tickerHeader');
+    if (tickerHeader) tickerHeader.textContent = `Last Copied Tickers: ${tickers.length}`;
 
-        tickerGroups.forEach((group, index) => {
-            const groupContainer = document.createElement('div');
-            groupContainer.className = 'ticker-group';
-            
-            const groupHeader = document.createElement('div');
-            groupHeader.className = 'ticker-group-header';
-            groupHeader.textContent = `Group ${index + 1} (${group.length} tickers)`;
-            
-            const tickerList = document.createElement('div');
-            tickerList.className = 'ticker-group-list';
-            tickerList.textContent = group.join(', ');
-            
-            const copyButton = document.createElement('button');
-            copyButton.className = 'copy-group-button';
+    if (!tickers || tickers.length === 0) {
+      copiedTickersList.innerHTML = '<div class="ticker-item">No tickers copied yet</div>';
+      return;
+    }
+
+    copiedTickersList.innerHTML = '';
+
+    const groupSize = 30;
+    const tickerGroups = [];
+
+    for (let i = 0; i < tickers.length; i += groupSize) {
+      tickerGroups.push(tickers.slice(i, i + groupSize));
+    }
+
+    tickerGroups.forEach((group, index) => {
+      const groupContainer = document.createElement('div');
+      groupContainer.className = 'ticker-group';
+
+      const groupHeader = document.createElement('div');
+      groupHeader.className = 'ticker-group-header';
+      groupHeader.textContent = `Group ${index + 1} (${group.length} tickers)`;
+
+      const tickerList = document.createElement('div');
+      tickerList.className = 'ticker-group-list';
+      tickerList.textContent = group.join(', ');
+
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-group-button';
+      copyButton.textContent = 'Copy Group';
+
+      copyButton.addEventListener('click', () => {
+        _browser.storage.local.get(['copyButtonVisibility'], (result) => {
+          const tickersToCopy = result.copyButtonVisibility ? group.slice(0, 30) : group;
+          copyToClipboard(tickersToCopy.join(', '));
+          copyButton.textContent = 'Copied!';
+          setTimeout(() => {
             copyButton.textContent = 'Copy Group';
-            copyButton.addEventListener('click', () => {
-                _browser.storage.local.get(['copyButtonVisibility'], (result) => {
-                    const tickersToCopy = result.copyButtonVisibility ? group.slice(0, 30) : group;
-                    copyToClipboard(tickersToCopy.join(', '));
-                    copyButton.textContent = 'Copied!';
-                    setTimeout(() => {
-                        copyButton.textContent = 'Copy Group';
-                    }, 2000);
-                });
-            });
-            groupContainer.appendChild(groupHeader);
-            groupContainer.appendChild(tickerList);
-            groupContainer.appendChild(copyButton);
-            copiedTickersList.appendChild(groupContainer);
+          }, 2000);
         });
+      });
 
-        // Adjust popup height based on content
-        const container = document.querySelector('.chartink-to-tv-container');
-        const contentHeight = container.scrollHeight;
-        container.style.height = `${Math.min(contentHeight, 600)}px`;
+      groupContainer.appendChild(groupHeader);
+      groupContainer.appendChild(tickerList);
+      groupContainer.appendChild(copyButton);
+      copiedTickersList.appendChild(groupContainer);
+    });
+  }
+
+  function copyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+
+  _browser.runtime.sendMessage({ message: 'getLastCopiedTickers' }, (response) => {
+    if (response && response.tickers) {
+      displayGroupedTickers(response.tickers);
     }
+  });
 
-    function copyToClipboard(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-    }
-
-    // Request the latest tickers when popup opens
-    _browser.runtime.sendMessage(
-        { message: "getLastCopiedTickers" },
-        (response) => {
-            if (response && response.tickers) {
-                displayGroupedTickers(response.tickers);
-            }
+  const reloadButton = document.getElementById('reloadButton');
+  if (reloadButton) {
+    reloadButton.addEventListener('click', () => {
+      reloadButton.textContent = 'Reloading...';
+      reloadButton.disabled = true;
+      _browser.runtime.sendMessage({ message: 'reloadAndCopyBullish' }, (response) => {
+        if (response && response.initiated) {
+          console.log('Reload and copy process initiated.');
+          setTimeout(() => {
+            reloadButton.textContent = 'Copied!';
+            setTimeout(() => {
+              reloadButton.textContent = 'Reload';
+              reloadButton.disabled = false;
+            }, 2000);
+          }, 3000);
+        } else {
+          console.error('Failed to initiate reload and copy process.');
+          reloadButton.textContent = 'Failed!';
+          setTimeout(() => {
+            reloadButton.textContent = 'Reload';
+            reloadButton.disabled = false;
+          }, 2000);
         }
-    );
+      });
+    });
+  }
+
+  // ✅ Hamburger toggle logic
+  const menuToggle = document.getElementById('menuToggle');
+  const settingsMenu = document.getElementById('settingsMenu');
+
+  if (menuToggle && settingsMenu) {
+    menuToggle.addEventListener('click', () => {
+      settingsMenu.classList.toggle('hidden');
+    });
+  }
 });

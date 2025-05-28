@@ -1,17 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Chartink Bridge",
-  "version": "3.5",
+  "version": "4.0",
   "description": "Extension that copies Chartink scanner widget output to clipboard and TradingView",
-  "permissions": ["clipboardWrite", "activeTab","storage"],
-  "host_permissions": ["https://chartink.com/*"],
-
+  "permissions": [
+    "clipboardWrite",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://chartink.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
-
   "action": {
-    "default_popup": "popup.html",
     "default_title": "Chartink to TradingView",
     "default_icon": {
       "16": "images/icon-16.png",
@@ -20,15 +23,12 @@
       "128": "images/icon-128.png"
     }
   },
-
   "content_scripts": [
     {
       "matches": ["https://chartink.com/*"],
-      "js": ["content.js"],
-      "css": ["popup.css"]
+      "js": ["content.js"]
     }
   ],
-
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",

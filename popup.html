@@ -1,45 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chartink Bridge</title>
-    <link rel="stylesheet" href="popup.css">
-</head>
-<body class="popup">
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Chartink Bridge</title>
+  <link href="popup.css" rel="stylesheet" />
+  <body class="popup">
     <div class="chartink-to-tv-container">
-        <a class="tradeinski-header" href="https://linktr.ee/TradeINski" target="_blank" aria-label="Visit TradeINski Linktree">TradeINski Chartink Bridge</a>
+      <div class="header-with-menu">
+        <a
+          aria-label="Visit TradeINski Linktree"
+          class="tradeinski-header"
+          href="https://linktr.ee/TradeINski"
+          target="_blank"
+          >TradeINski Chartink Bridge</a
+        >
+        <button id="menuToggle" class="hamburger" title="Settings">☰</button>
+      </div>
+
+      <div id="settingsMenu" class="toggle-menu hidden">
+        <div class="toggle-container">
+          <label class="switch" for="redirect">
+            <input id="redirect" name="redirect" type="checkbox" />
+            <span class="round slider"></span>
+          </label>
+          <span class="toggle-label">Redirect To TradingView</span>
+        </div>
 
         <div class="toggle-container">
-            <label class="switch" for="redirect">
-                <input type="checkbox" id="redirect" name="redirect" aria-label="Redirect Charts to TradingView">
-                <span class="slider round"></span>
-            </label>
-            <span class="toggle-label">Redirect To TradingView</span>
+          <label class="switch" for="widgetCopy">
+            <input id="widgetCopy" name="widgetCopy" type="checkbox" />
+            <span class="round slider"></span>
+          </label>
+          <span class="toggle-label">Show Copy Emoji Button</span>
         </div>
 
-    <div class="toggle-container">
-        <label class="switch" for="widgetCopy">
-            <input type="checkbox" id="widgetCopy" name="widgetCopy" aria-label="Enable Widget Copy Button">
-            <span class="slider round"></span>
-        </label>
-        <span class="toggle-label">Show Copy Emoji Button</span>
-    </div>
-
-    <div class="toggle-container">
-        <label class="switch" for="copyButtonVisibility">
-            <input type="checkbox" id="copyButtonVisibility" name="copyButtonVisibility" aria-label="Group Tickers in Popup">
-            <span class="slider round"></span>
-        </label>
-        <span class="toggle-label">Group Tickers In Popup</span>
-    </div>
-
-        <div id="copiedTickersContainer" class="copied-tickers-container">
-            <h3>Last Copied Tickers</h3>
-            <div id="copiedTickersList"></div>
+        <div class="toggle-container">
+          <label class="switch" for="copyButtonVisibility">
+            <input id="copyButtonVisibility" name="copyButtonVisibility" type="checkbox" />
+            <span class="round slider"></span>
+          </label>
+          <span class="toggle-label">Group Tickers In Popup</span>
         </div>
-    </div>
+      </div>
 
+      <button id="reloadButton" class="button-refresh">Reload</button>
+
+      <div class="copied-tickers-container" id="copiedTickersContainer">
+        <h3 id="tickerHeader">Last Copied Tickers</h3>
+        <div id="copiedTickersList"></div>
+      </div>
+    </div>
     <script src="popup.js"></script>
-</body>
+  </body>
 </html>
