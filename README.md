@@ -1,5 +1,4 @@
-🧩 Chartink Bridge – Chrome Extension Description
-Chartink Bridge is a productivity-enhancing Chrome extension designed for stock market traders who use Chartink.com and TradingView. It seamlessly connects Chartink scanner widgets with TradingView by enabling smart ticker symbol redirection, one-click copying, and customizable ticker grouping.
+🧩 Chartink Bridge is a productivity-enhancing Chrome extension designed for stock market traders who use Chartink.com and TradingView. It seamlessly connects Chartink scanner widgets with TradingView by enabling smart ticker symbol redirection, one-click copying, and customizable ticker grouping.
 
 ⚙️ Key Features
 🔁 Chart Redirection Toggle
