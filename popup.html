@@ -1,1 +1,71 @@
-<!doctypehtml><html lang="en"><meta charset="UTF-8"><meta content="width=device-width,initial-scale=1"name="viewport"><title>Chartink Bridge</title><link href="popup.css"rel="stylesheet"><body class="popup"><div class="chartink-to-tv-container"><div class="header-with-menu"><a aria-label="Visit TradeINski Linktree"class="tradeinski-header"href="https://linktr.ee/TradeINski"target="_blank">TradeINski Chartink Bridge</a> <button class="hamburger"id="menuToggle"title="Settings">☰</button></div><div class="hidden toggle-menu"id="settingsMenu"><div class="toggle-container"><label class="switch"for="redirect"><input id="redirect"name="redirect"type="checkbox"> <span class="round slider"></span></label> <span class="toggle-label">Redirect To TradingView</span></div><div class="toggle-container"><label class="switch"for="widgetCopy"><input id="widgetCopy"name="widgetCopy"type="checkbox"> <span class="round slider"></span></label> <span class="toggle-label">Show Copy Emoji Button</span></div><div class="toggle-container"><label class="switch"for="copyButtonVisibility"><input id="copyButtonVisibility"name="copyButtonVisibility"type="checkbox"> <span class="round slider"></span></label> <span class="toggle-label">Group Tickers In Popup</span></div></div><button class="button-refresh"id="reloadButton">Reload</button><div class="copied-tickers-container"id="copiedTickersContainer"><h3 id="tickerHeader">Last Copied Tickers</h3><div id="copiedTickersList"></div></div></div><script src="popup.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Chartink Bridge</title>
+    <link href="popup.css" rel="stylesheet" />
+  </head>
+  <body class="popup">
+    <div class="chartink-to-tv-container">
+
+      <!-- Header with title and hamburger menu -->
+      <div class="header-with-menu">
+        <a
+          aria-label="Visit TradeINski Linktree"
+          class="tradeinski-header"
+          href="https://linktr.ee/TradeINski"
+          target="_blank"
+        >
+          TradeINski Chartink Bridge
+        </a>
+        <button
+          class="hamburger"
+          id="menuToggle"
+          title="Settings"
+        >
+          ☰
+        </button>
+      </div>
+
+      <!-- Hidden settings menu toggled by hamburger -->
+      <div class="hidden toggle-menu" id="settingsMenu">
+        <div class="toggle-container">
+          <label class="switch" for="redirect">
+            <input id="redirect" name="redirect" type="checkbox" />
+            <span class="round slider"></span>
+          </label>
+          <span class="toggle-label">Redirect To TradingView</span>
+        </div>
+
+        <div class="toggle-container">
+          <label class="switch" for="widgetCopy">
+            <input id="widgetCopy" name="widgetCopy" type="checkbox" />
+            <span class="round slider"></span>
+          </label>
+          <span class="toggle-label">Show Copy Emoji Button</span>
+        </div>
+
+        <div class="toggle-container">
+          <label class="switch" for="copyButtonVisibility">
+            <input id="copyButtonVisibility" name="copyButtonVisibility" type="checkbox" />
+            <span class="round slider"></span>
+          </label>
+          <span class="toggle-label">Group Tickers In Popup</span>
+        </div>
+      </div>
+
+      <!-- Reload Button -->
+      <button class="button-refresh" id="reloadButton">Reload</button>
+
+      <!-- Copied tickers section -->
+      <div class="copied-tickers-container" id="copiedTickersContainer">
+        <h3 id="tickerHeader">Last Copied Tickers</h3>
+        <div id="copiedTickersList"></div>
+      </div>
+
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
